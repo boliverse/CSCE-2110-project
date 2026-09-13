@@ -1,0 +1,4 @@
+R101|Study Room 101|Study Room|1
+R102|Study Room 102|Study Room|1
+R103|Study Room 103|Study Room|1
+R104|Study Room 104|Study Room|1
