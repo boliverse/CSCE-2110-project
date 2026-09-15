@@ -8,10 +8,12 @@ using namespace std;
 
 int main()
 {
+    // this vector stores the info about the reservable items and locations
     vector<Resource> resources;
-
+    // imports the file into program to be read
     ifstream file("resources.txt");
 
+    // just checks if the file is infact a file
     if (!file)
     {
         cout << "Error opening resources file." << endl;
@@ -19,7 +21,8 @@ int main()
     }
 
     string line;
-
+    // this reads the file line by line assigning each string the approiate info between the |'s
+    // also expands the vector as more info is assigned
     while (getline(file, line))
     {
         string id;
@@ -40,9 +43,9 @@ int main()
 
         resources.push_back(resource);
     }
-
+    
     file.close();
-
+// this is all output using the display function located in resource.cpp
     cout << "Campus Resources" << endl;
 
     for (Resource resource : resources)
