@@ -21,4 +21,4 @@ Reservation(int id, const std::string& sID, const std::string& rID,
   date(d), startTime(start), endTime(end), status("ACTIVE") {}
 };
 
-#endif
+#endif 
