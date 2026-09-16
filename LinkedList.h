@@ -7,11 +7,22 @@ using namespace std;
 
 class LinkedList
 {
-
     private:
-        void InsertReservation(Reservation r1);
-        void RemoveReservation(Reservation r1);
-        void DisplayReservation(Reservation r1);
-        Reservation FindReservation(Reservation r1);
+        struct Node
+        {
+            Reservation reservation;
+            Node* next;
+
+            Node(const Reservation& r) : reservation(r), next(nullptr) {}
+        };
+
+    public:
+        LinkedList();
+        ~LinkedList();
+
+        void insertReservation(const Reservation& reservation);
+        void removeReservation(int reservationID);
+        void displayReservation() const;
+        Reservation* findReservation(int reservationID) const;
 };
 #endif
