@@ -1,24 +1,39 @@
-#ifndef RESERVATION.H
-#define RESERVATION.H
+#ifndef RESERVATION_H
+#define RESERVATION_H
 
 #include <string>
 
-struct Reservation {
-int reservationID;
-std::string studentID;
-std::string resourceID;
-std::string date;
-std::string startTime;
-std::string endTime;
-std::string status;
+class Reservation
+{
+private:
+    int reservationID;
+    int studentID;
+    std::string studentName;
+    int resourceID;
+    std::string reservationDate;
 
-Reservation()
-: reservationID(-1), status("ACTIVE") {}
+public:
+    Reservation();
+    
+    Reservation(int reservationID,
+                int studentID,
+                const std::string& studentName,
+                int resourceID,
+                const std::string& reservationDate);
 
-Reservation(int id, const std::string& sID, const std::string& rID,
-         const std::string& d, const std::string& start, const std::string& end)
-: reservation(id), studentID(sID), resourceID(rID),
-  date(d), startTime(start), endTime(end), status("ACTIVE") {}
+    int getReservationID() const;
+    int getStudentID() const;
+    std::string getStudentName() const;
+    int getResourceID() const;
+    std::string getReservationDate() const;
+
+    void setReservationID(int id);
+    void setStudentID(int id);
+    void setStudentName(const std::string& name);
+    void setResourceID(int id);
+    void setReservationDate(const std::string& date);
+
+    void display() const;
 };
 
-#endif 
+#endif
