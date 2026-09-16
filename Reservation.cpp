@@ -6,7 +6,7 @@ Reservation::Reservation()
   : reservationId(""), studentID(""), studentName(""), resourceID(""), reservationDate("") {}
 
 Reservation::Reservation(const std::string& reservationIDIn, const std::string& studentIDin, const std::string& studentNameIn, const std::string& resourceIdIn, const std::string& dateIn)
-  : reservationID(reservationIDIN), studentID(studentIDIn), studentNName(studentNameIN), resourceID(resourceIDIn), reservationDate(dateIn) {}
+  : reservationID(reservationIDIn), studentID(studentIDIn), studentName(studentNameIN), resourceID(resourceIDIn), reservationDate(dateIn) {}
 
 std::string Reservation::getReservationID() const { return reservationID; }
 std::string Reservation::getStudentID() const {return studentID; }
