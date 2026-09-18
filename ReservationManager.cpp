@@ -5,15 +5,7 @@ using namespace std;
 
 bool ReservationManager::reservationIDExists(int reservationID) const
 {
-    for (const Reservation& reservation : reservations)
-    {
-        if (reservation.getReservationID() == reservationID)
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return reservations.findReservation(reservationID) != nullptr;
 }
 
 bool ReservationManager::studentIDIsValid(int studentID) const
@@ -65,7 +57,7 @@ bool ReservationManager::createReservation(
         return false;
     }
 
-    reservations.push_back(reservation);
+    reservations.insertReservation(reservation);
 
     cout << "Reservation created successfully." << endl;
 
@@ -74,27 +66,24 @@ bool ReservationManager::createReservation(
 
 bool ReservationManager::cancelReservation(int reservationID)
 {
-    for (auto it = reservations.begin();
-         it != reservations.end();
-         ++it)
+    Reservation* reservation =
+        reservations.findReservation(reservationID);
+
+    if (reservation == nullptr)
     {
-        if (it->getReservationID() == reservationID)
-        {
-            Reservation cancelledReservation = *it;
-
-            cancellationHistory.push(cancelledReservation);
-
-            reservations.erase(it);
-
-            cout << "Reservation cancelled successfully." << endl;
-
-            return true;
-        }
+        cout << "Reservation not found." << endl;
+        return false;
     }
 
-    cout << "Reservation not found." << endl;
+    Reservation cancelledReservation = *reservation;
 
-    return false;
+    cancellationHistory.push(cancelledReservation);
+
+    reservations.removeReservation(reservationID);
+
+    cout << "Reservation cancelled successfully." << endl;
+
+    return true;
 }
 
 bool ReservationManager::undoCancellation()
@@ -116,7 +105,7 @@ bool ReservationManager::undoCancellation()
         return false;
     }
 
-    reservations.push_back(restoredReservation);
+    reservations.insertReservation(restoredReservation);
 
     cout << "Most recent cancellation has been undone." << endl;
 
@@ -125,45 +114,20 @@ bool ReservationManager::undoCancellation()
 
 void ReservationManager::displayReservations() const
 {
-    if (reservations.empty())
-    {
-        cout << "There are no active reservations." << endl;
-        return;
-    }
+    cout << "\n===== Active Reservations =====" << endl;
 
-    cout << "\n===== Active Reservations =====\n";
-
-    for (const Reservation& reservation : reservations)
-    {
-        reservation.display();
-    }
+    reservations.displayReservations();
 }
 
 Reservation* ReservationManager::searchReservationByID(
     int reservationID)
 {
-    for (Reservation& reservation : reservations)
-    {
-        if (reservation.getReservationID() == reservationID)
-        {
-            return &reservation;
-        }
-    }
-
-    return nullptr;
+    return reservations.findReservation(reservationID);
 }
 
 Reservation* ReservationManager::searchReservationByStudentID(
     int studentID)
 {
-    for (Reservation& reservation : reservations)
-    {
-        if (reservation.getStudentID() == studentID)
-        {
-            return &reservation;
-        }
-    }
-
     return nullptr;
 }
 
