@@ -22,7 +22,7 @@ class LinkedList
 
         void insertReservation(const Reservation& reservation);
         void removeReservation(int reservationID);
-        void displayReservation() const;
+        void displayReservation(int reservationID) const;
         Reservation* findReservation(int reservationID) const;
 };
 #endif
