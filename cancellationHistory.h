@@ -1,32 +1,24 @@
-#ifndef CANCELLATIONHISTORY_H
-#define CANCELLATIONHISTORY_H
+#ifndef CANCELLATION_HISTORY_H
+#define CANCELLATION_HISTORY_H
 
-#include <stack>
-
-//#include "Reservation.h" will need to wait until Reservation is created 
-
-using namespace std;
+#include "Reservation.h"
+#include <vector>
 
 class CancellationHistory
-
 {
+private:
+    std::vector<Reservation> history;
 
-    private:
-        // stack<Reservation> history;
-
-
-
-
+public:
+    void push(const Reservation& reservation);
+    
+    bool pop(Reservation& reservation);
+    
+    bool isEmpty() const;
+    
+    void display() const;
+    
+    int size() const;
 };
-
-
-
-
-
-
-
-
-
-
 
 #endif
