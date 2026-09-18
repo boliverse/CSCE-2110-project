@@ -67,15 +67,22 @@ void LinkedList::removeReservation(int reservationID)
     }
 }
 
-void LinkedList::displayReservations() const
+void LinkedList::displayReservation(int reservationID) const
 {
     Node* current = head;
 
     while(current != nullptr)
     {
-        current->reservation.display();
+        if(current->reservation.getReservationID() == reservationID)
+        {
+            current->reservation.display();
+            return;
+        }
+
         current = current->next;
     }
+
+    cout << "Reservation not found." << endl;
 }
 
 Reservation* LinkedList::findReservation(int reservationID) const
