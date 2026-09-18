@@ -13,15 +13,21 @@ private:
 
 public:
     bool createReservation(const Reservation& reservation);
+
     bool cancelReservation(int reservationID);
+
     bool undoCancellation();
 
     void displayReservations() const;
 
     Reservation* searchReservationByID(int reservationID);
 
+    Reservation* searchReservationByStudentID(int studentID);
+
     bool reservationIDExists(int reservationID) const;
+
     bool studentIDIsValid(int studentID) const;
+
     bool resourceIDIsValid(int resourceID) const;
 
     void displayCancellationHistory() const;
