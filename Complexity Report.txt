@@ -1,0 +1,16 @@
+﻿Complexity Analysis  Campus Resource Reservation System
+
+
+Reservation insertion is O(n). The linked list only keeps track of the head, so adding a new reservation means starting at the beginning and going through the list until reaching the last node. As more reservations are added, it takes longer to reach the end.
+
+
+Reservation removal is O(n). When a reservation is cancelled, the program has to search through the list to find the reservation with the matching ID. In the worst case, it may have to check almost every reservation before finding it. Once the reservation is found, removing it is quick, but the search is what makes the operation O(n).
+
+
+Waiting list processing is O(1). The waiting list keeps track of both the front and back of the queue. This means a student can be added to the back or removed from the front without searching through the other students. Because of this, the operation stays the same speed even as the waiting list gets bigger.
+
+
+Undo cancellation is O(n). Removing the last cancelled reservation from the stack is O(1), but the undo process also has to make sure the reservation ID has not already been reused. This requires searching through the reservation list, and then the reservation has to be added back into the list, which also requires walking to the end. Because of these extra steps, the overall operation is O(n).
+
+
+Overall, the reservation list becomes slower as it gets larger because it does not keep track of its last node. The waiting list is faster because it keeps track of both the front and back, so adding and removing students does not require searching through the list.
