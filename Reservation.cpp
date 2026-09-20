@@ -1,4 +1,4 @@
-#include "../include/Reservation.h"
+#include "Reservation.h"
 #include <iostream>
 
 using namespace std;

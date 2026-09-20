@@ -1,4 +1,6 @@
-#include "../include/ReservationManager.h"
+// MISTAKE: same bad path as CancellationHistory.cpp. "../include/..." does not
+// exist, the headers are in the same folder as the .cpp files.
+#include "ReservationManager.h"
 #include <iostream>
 
 using namespace std;
@@ -75,6 +77,9 @@ bool ReservationManager::cancelReservation(int reservationID)
         return false;
     }
 
+    // NOTE: this copy matters. removeReservation deletes the node, so the
+    // pointer above would be dangling right after. Copying first is correct,
+    // just leaving a note so it does not get "cleaned up" later by accident.
     Reservation cancelledReservation = *reservation;
 
     cancellationHistory.push(cancelledReservation);
@@ -99,6 +104,12 @@ bool ReservationManager::undoCancellation()
     if (reservationIDExists(
             restoredReservation.getReservationID()))
     {
+        // MISTAKE (behavior): the old code already popped the cancellation off
+        // the stack, then bailed out here without putting it back. The
+        // cancellation was silently lost forever. Pushing it back so the undo
+        // can be retried later.
+        cancellationHistory.push(restoredReservation);
+
         cout << "Cannot restore reservation because its ID "
              << "already exists." << endl;
 
@@ -116,6 +127,7 @@ void ReservationManager::displayReservations() const
 {
     cout << "\n===== Active Reservations =====" << endl;
 
+    // this called a function that did not exist yet, see LinkedList.h
     reservations.displayReservations();
 }
 
@@ -128,7 +140,9 @@ Reservation* ReservationManager::searchReservationByID(
 Reservation* ReservationManager::searchReservationByStudentID(
     int studentID)
 {
-    return nullptr;
+    // MISTAKE: this function used to be "return nullptr;" no matter what, so
+    // searching by student ID always said not found. Now it actually searches.
+    return reservations.findReservationByStudentID(studentID);
 }
 
 void ReservationManager::displayCancellationHistory() const

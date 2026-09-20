@@ -1,5 +1,11 @@
 #include "LinkedList.h"
 
+// MISTAKE: this file used cout and endl but nothing included <iostream>.
+// LinkedList.h only includes <string> through Reservation.h.
+#include <iostream>
+
+using namespace std;
+
 LinkedList::LinkedList()
 {
     head = nullptr;
@@ -14,6 +20,8 @@ LinkedList::~LinkedList()
         delete current;
         current = next;
     }
+
+    head = nullptr;
 }
 
 void LinkedList::insertReservation(const Reservation& reservation)
@@ -85,6 +93,24 @@ void LinkedList::displayReservation(int reservationID) const
     cout << "Reservation not found." << endl;
 }
 
+// new function, prints every reservation in the list
+void LinkedList::displayReservations() const
+{
+    if(head == nullptr)
+    {
+        cout << "There are no active reservations." << endl;
+        return;
+    }
+
+    Node* current = head;
+
+    while(current != nullptr)
+    {
+        current->reservation.display();
+        current = current->next;
+    }
+}
+
 Reservation* LinkedList::findReservation(int reservationID) const
 {
     Node* current = head;
@@ -95,7 +121,25 @@ Reservation* LinkedList::findReservation(int reservationID) const
         {
             return &current->reservation;
         }
-      
+
+        current = current->next;
+    }
+
+    return nullptr;
+}
+
+// new function, returns the first reservation that belongs to this student
+Reservation* LinkedList::findReservationByStudentID(int studentID) const
+{
+    Node* current = head;
+
+    while(current != nullptr)
+    {
+        if(current->reservation.getStudentID() == studentID)
+        {
+            return &current->reservation;
+        }
+
         current = current->next;
     }
 

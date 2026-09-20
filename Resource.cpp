@@ -19,27 +19,34 @@ Resource::Resource(string id, string name, string type, bool status)
     available = status;
 }
 
-string Resource::getResourceID()
+string Resource::getResourceID() const
 {
     return resourceID;
 }
 
-string Resource::getResourceName()
+string Resource::getResourceName() const
 {
     return resourceName;
 }
 
-string Resource::getResourceType()
+string Resource::getResourceType() const
 {
     return resourceType;
 }
 
-bool Resource::isAvailable()
+bool Resource::isAvailable() const
 {
     return available;
 }
 
-void Resource::display()
+// MISTAKE (fixed): this function was missing entirely even though the header
+// promised it existed.
+void Resource::setAvailable(bool status)
+{
+    available = status;
+}
+
+void Resource::display() const
 {
     cout << resourceID << " | "
          << resourceName << " | "

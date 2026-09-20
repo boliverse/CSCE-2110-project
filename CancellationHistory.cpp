@@ -1,4 +1,8 @@
-#include "../include/CancellationHistory.h"
+// MISTAKE: this was #include "../include/CancellationHistory.h". There is no
+// include folder in this project, everything sits in one directory, so the
+// compiler stopped with "No such file or directory". Same problem was in
+// ReservationManager.cpp.
+#include "CancellationHistory.h"
 #include <iostream>
 
 using namespace std;
@@ -41,10 +45,14 @@ void CancellationHistory::display() const
 
     cout << "\n===== Cancellation History =====\n";
 
-    for (int i = static_cast<int>(history.size()) - 1; i >= 0; i--)
+    int total = static_cast<int>(history.size());
+
+    for (int i = total - 1; i >= 0; i--)
     {
-        cout << "\nCancellation #" 
-             << history.size() - i << endl;
+        // MISTAKE: this used to be history.size() - i, which mixes an unsigned
+        // size_t with an int. That gives a signed/unsigned warning and can
+        // print a garbage huge number. Using two ints instead.
+        cout << "\nCancellation #" << (total - i) << endl;
 
         history[i].display();
     }
