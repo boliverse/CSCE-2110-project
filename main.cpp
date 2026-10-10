@@ -7,6 +7,7 @@
 #include "Reservation.h"
 #include "ReservationManager.h"
 #include "WaitingList.h"
+#include "Search.h"
 
 using namespace std;
 
@@ -85,6 +86,7 @@ void printMenu()
     cout << "9. Add a student to the waiting list" << endl;
     cout << "10. Remove next student from the waiting list" << endl;
     cout << "11. Display waiting list" << endl;
+    cout << "12. Search resource by ID" << endl;
     cout << "0. Quit" << endl;
     cout << "Choice: ";
 }
@@ -239,6 +241,26 @@ int main()
         {
             cout << "\n===== Waiting List =====" << endl;
             waitingList.display();
+        }
+        else if (choice == 12)
+        {
+            string resourceID;
+
+            cout << "Resource ID to search (e.g. R101): ";
+            cin >> resourceID;
+
+            // binary search; searchResourceByID sorts the vector first if it
+            // is not already sorted by ID
+            int index = Search::searchResourceByID(resources, resourceID);
+
+            if (index == -1)
+            {
+                cout << "Resource not found." << endl;
+            }
+            else
+            {
+                resources[index].display();
+            }
         }
         else if (choice != 0)
         {

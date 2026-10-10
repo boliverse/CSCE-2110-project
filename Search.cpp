@@ -4,7 +4,7 @@ using namespace std;
 
 namespace Search
 {
-    
+    // ---------------- Binary search on resources ----------------
 
     bool resourceIDLess(const string& a, const string& b)
     {
@@ -128,39 +128,5 @@ namespace Search
         }
 
         return binarySearchResourceByID(resources, resourceID);
-    }
-
-    // ---------------- Linear search on reservations ----------------
-
-    int linearSearchReservationByID(const vector<Reservation>& reservations,
-                                    int reservationID)
-    {
-        for (size_t i = 0; i < reservations.size(); i++)
-        {
-            if (reservations[i].getReservationID() == reservationID)
-            {
-                return static_cast<int>(i);
-            }
-        }
-
-        return -1;
-    }
-
-    vector<int> linearSearchReservationsByStudentID(
-        const vector<Reservation>& reservations,
-        int studentID)
-    {
-        vector<int> matches;
-
-        // no early return here: a student can hold several reservations
-        for (size_t i = 0; i < reservations.size(); i++)
-        {
-            if (reservations[i].getStudentID() == studentID)
-            {
-                matches.push_back(static_cast<int>(i));
-            }
-        }
-
-        return matches;
     }
 }
