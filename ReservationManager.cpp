@@ -149,3 +149,8 @@ void ReservationManager::displayCancellationHistory() const
 {
     cancellationHistory.display();
 }
+
+vector<Reservation> ReservationManager::getAllReservations() const
+{
+    return reservations.getAllReservations();
+}
