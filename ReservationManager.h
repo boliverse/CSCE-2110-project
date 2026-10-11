@@ -4,6 +4,7 @@
 #include "Reservation.h"
 #include "LinkedList.h"
 #include "CancellationHistory.h"
+#include <vector>
 
 class ReservationManager
 {
@@ -31,6 +32,8 @@ public:
     bool resourceIDIsValid(int resourceID) const;
 
     void displayCancellationHistory() const;
+
+    std::vector<Reservation> getAllReservations() const;
 };
 
 #endif
