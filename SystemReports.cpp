@@ -1,5 +1,5 @@
 #include "SystemReports.h"
-
+#include "Sorting.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -94,17 +94,9 @@ void SystemReports::mostRequestedResources(const vector<Resource>& resources, co
 
         counts.push_back(make_pair(count, resource.getResourceID() + " - " + resource.getResourceName()));
     }
-
-    sort(counts.begin(), counts.end(), [](const pair<int, string>& a,  const pair<int, string>& b)
-         {
-             if(a.first != b.first)
-             {  
-                 return a.first > b.first;
-             }
-
-             return a.second < b.second;
-         });
-
+    
+    Sorting::sortResourceCounts(counts);
+  
     int rank = 1;
 
     for(const auto& item : counts)
