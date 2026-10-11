@@ -145,3 +145,17 @@ Reservation* LinkedList::findReservationByStudentID(int studentID) const
 
     return nullptr;
 }
+
+vector<Reservation> LinkedList::getAllReservations() const
+{
+    vector<Reservation> result;
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        result.push_back(current->reservation);
+        current = current->next;
+    }
+
+    return result;
+}
