@@ -28,6 +28,8 @@ public:
 
     // added so main can tell whether the line is empty before printing
     bool isEmpty() const;
+
+    int getWaitingCount() const;
 };
 
 #endif
