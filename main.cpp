@@ -7,6 +7,7 @@
 #include "Reservation.h"
 #include "ReservationManager.h"
 #include "WaitingList.h"
+#include "SystemReports.h"
 #include "Search.h"
 
 using namespace std;
@@ -87,7 +88,19 @@ void printMenu()
     cout << "10. Remove next student from the waiting list" << endl;
     cout << "11. Display waiting list" << endl;
     cout << "12. Search resource by ID" << endl;
+    cout << "13. System Reports Menu" << endl;
     cout << "0. Quit" << endl;
+    cout << "Choice: ";
+}
+
+void printReportsMenu()
+{
+    cout << "\n===== System Reports =====" << endl;
+    cout << "1. Active Reservations" << endl;
+    cout << "2. Resource Utilization" << endl;
+    cout << "3. Most Requested Resources" << endl;
+    cout << "4. Waiting-List Statistics" << endl;
+    cout << "0. Return to Main Menu" << endl;
     cout << "Choice: ";
 }
 
@@ -262,6 +275,47 @@ int main()
                 resources[index].display();
             }
         }
+        else if (choice == 13)
+        {
+            int reportChoice = -1;
+
+            while (reportChoice != 0)
+            {
+                printReportsMenu();
+
+                if (!(cin >> reportChoice))
+                {
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                    cout << "Please enter a number." << endl;
+                    continue;
+                }
+
+                if (reportChoice == 1)
+                {
+                    SystemReports::activeReservations(manager);
+                }
+                else if (reportChoice == 2)
+                {
+                    SystemReports::resourceUtilization(
+                    resources, manager);
+                }
+                else if (reportChoice == 3)
+                {
+                    SystemReports::mostRequestedResources(
+                    resources, manager);
+                }
+                else if (reportChoice == 4)
+                {
+                    SystemReports::waitingListStatistics(
+                    resources, waitingList);
+                }
+                else if (reportChoice != 0)
+                {
+                    cout << "Invalid report choice." << endl;
+                }
+            }
+        }  
         else if (choice != 0)
         {
             cout << "That is not one of the options." << endl;
